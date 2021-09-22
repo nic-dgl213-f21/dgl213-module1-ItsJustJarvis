@@ -1,0 +1,27 @@
+{
+  "name": "dgl213-module1-itsjustjarvis",
+  "version": "1.0.0",
+  "description": "DGL123 Module1 Project Files",
+  "main": "floodfill.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nic-dgl213-f21/dgl213-module1-ItsJustJarvis.git"
+  },
+  "keywords": [
+    "javascript",
+    "nic",
+    "dgl213"
+  ],
+  "author": "Reeve Jarvis N0189975",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nic-dgl213-f21/dgl213-module1-ItsJustJarvis/issues"
+  },
+  "homepage": "https://github.com/nic-dgl213-f21/dgl213-module1-ItsJustJarvis#readme",
+  "devDependencies": {
+    "eslint": "^7.32.0"
+  }
+}
