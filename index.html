@@ -4,13 +4,111 @@
         <meta charset="utf-8" />
         <title>Flood Fill</title>
 
+        <!-- New Addition - Styles added for a more responsive game, as well as better UI and personality -->
         <style>
-            #gameboard {
+            :root {
+                background: linear-gradient(45deg, rgba(255, 0, 0, 0.4), rgba(0, 255, 0, 0.4), rgba(0, 0, 255, 0.4));
+                box-sizing: border-box;
+            }
+            *,
+            ::before,
+            ::after {
+                box-sizing: inherit;
+            }
+            html,
+            body {
+                min-height: 100%;
+            }
+            body {
+                width: 60%;
+                margin: auto;
+            }
+            h1 {
+                margin: 2rem auto;
+                font-size: 3rem;
+            }
+            h1,
+            h2,
+            h3 {
+                font-family: "Pacifico", cursive;
+                text-decoration: underline;
+            }
+            p,
+            ul,
+            button {
+                font-family: "Montserrat", sans-serif;
+            }
+            canvas {
+                width: 600px;
+                min-height: 100%;
+            }
+            #gameArea {
+                width: 90%;
+                margin: auto;
                 display: flex;
+                flex-flow: column;
+            }
+
+            #gameTitle,
+            #gameBoard,
+            #ui,
+            #results {
+                display: flex;
+                flex-flow: row;
+                background-color: rgba(255, 255, 255, 0.5);
+                border: 3px solid black;
+                border-collapse: collapse;
+                text-align: center;
+            }
+            #canvasArea,
+            #instructions,
+            #changes,
+            #colors,
+            #scoreboard {
+                flex: 1 1 auto;
+                border: 3px solid black;
+                border-collapse: collapse;
+            }
+            #changes,
+            #colors,
+            #scoreboard {
+                text-align: center;
+                padding: 1rem;
+            }
+            #gameTitle {
+                margin-top: 3rem;
+                border-top: 6px solid black;
+                border-left: 6px solid black;
+                border-right: 6px solid black;
+            }
+            #results {
+                text-align: center;
+                margin-bottom: 3rem;
+            }
+            #winner {
+                margin: auto;
+                text-align: center;
             }
             #instructions {
-                max-width: 300px;
-                margin: 10px;
+                text-align: left;
+                padding: 1rem;
+            }
+            #changes {
+                width: 20%;
+            }
+            #colors {
+                width: 40%;
+            }
+            #scoreboard {
+                width: 20%;
+            }
+            .color-select {
+                flex: auto;
+                width: auto;
+            }
+            section#scoreboard p {
+                display: inline-flex;
+                margin: auto;
             }
         </style>
     </head>
