@@ -20,6 +20,13 @@ const ctx = canvas.getContext("2d");
 // UI references
 const restartButton = document.querySelector("#restart");
 const colorSelectButtons = document.querySelectorAll(".color-select");
+// New Addition - Reference to the undo button
+const undoButton = document.querySelector("#undo");
+
+// New Addition - References to new scoreboard elements
+const numberOfClicksText = document.querySelector("#numberOfClicks");
+const playerScoreText = document.querySelector("#playerScore");
+const results = document.querySelector("#results");
 
 // Constants
 const CELL_COLORS = {
