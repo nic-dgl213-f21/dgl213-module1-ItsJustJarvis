@@ -183,6 +183,18 @@ function arraysAreEqual(arr1, arr2) {
     }
 }
 
+// New Addition - Function that tracks the number of cells changed
+function trackCellChanges() {
+    cellsChanged++;
+}
+
+// New Addition - Function that tracks the high score for grid repeats
+function trackHighScores(finalScore) {
+    if (finalScore > previousHighScore) {
+        previousHighScore = finalScore;
+    }
+}
+
 // #endregion
 
 //Start game
