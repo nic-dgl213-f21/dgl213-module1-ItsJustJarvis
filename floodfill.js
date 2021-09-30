@@ -86,7 +86,9 @@ function render(grid) {
         ctx.fillStyle = `rgb(${grid[i][0]}, ${grid[i][1]}, ${grid[i][2]})`;
         ctx.fillRect((i % CELLS_PER_AXIS) * CELL_WIDTH, Math.floor(i / CELLS_PER_AXIS) * CELL_HEIGHT, CELL_WIDTH, CELL_HEIGHT);
     }
-    // playerScoreText.innerText = playerScore;
+    // New Addition - On render we update our scoreboard elements with current values
+    numberOfClicksText.innerText = numberOfClicks;
+    playerScoreText.innerText = playerScore;
 }
 
 function updateGridAt(mousePositionX, mousePositionY) {
