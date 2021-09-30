@@ -1,7 +1,7 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
+        <meta charset="utf-8" />
         <title>Flood Fill</title>
 
         <style>
@@ -15,27 +15,58 @@
         </style>
     </head>
     <body>
-        <h1>Flood Fill</h1>
-        <div id="gameboard">
-            <canvas width="600" height="400"></canvas>
-            <div id="instructions">
-                <h2>How to play</h2>
-                <p><strong>Goal: </strong>Make all cells on the grid/board the same color.</p>
-                <ul>
-                    <li>Choose a color by clicking on one of the labeled buttons at bottom of the grid.</li>
-                    <li>Click on a cell to change its color to the selected color.</li>
-                    <li>All neighbouring cells of the clicked-on cell's color will be changed to the selected color.</li>
-                </ul>
+        <!-- New Addition - Container for the game to assist with layout changes -->
+        <div id="gameArea">
+            <!--New Addition - Different containers within game area for each modular peice of UI -->
+            <div id="gameTitle">
+                <h1>Flood Fill</h1>
             </div>
-        </div>
-        </div>
-        <div id="ui">
-            <button id="restart">Restart</button>
-            <button name="red" class="color-select">Red</button>
-            <button name="green" class="color-select">Green</button>
-            <button name="blue" class="color-select">Blue</button>
-            <button name="white" class="color-select">White</button>
-            <button name="black" class="color-select">Black</button>
+            <div id="gameBoard">
+                <div id="canvasArea">
+                    <canvas></canvas>
+                </div>
+                <div id="instructions">
+                    <h2>How to play:</h2>
+                    <p><strong>Goal: </strong>Make all cells on the grid/board the same color.</p>
+                    <ul>
+                        <li>Choose a color by clicking on one of the labeled buttons at bottom of the grid.</li>
+                        <li>Click on a cell to change its color to the selected color.</li>
+                        <li>All neighbouring cells of the clicked-on cell's color will be changed to the selected color.</li>
+                    </ul>
+                    <!-- New Addition - Updated Information on scoring system -->
+                    <h2>Scoring System:</h2>
+                    <p>
+                        You get 5 points per cell changed on each click. When you fill the board your final score is calculated based on the number of clicks it
+                        took you to finish. Higher changes, higher rewards!
+                    </p>
+                </div>
+            </div>
+            <div id="ui">
+                <!-- New Addition - UI split into sections based on purpose -->
+                <section id="colors">
+                    <h3>Color Choices:</h3>
+                    <button name="red" class="color-select">Red</button>
+                    <button name="green" class="color-select">Green</button>
+                    <button name="blue" class="color-select">Blue</button>
+                    <button name="white" class="color-select">White</button>
+                    <button name="black" class="color-select">Black</button>
+                </section>
+                <section id="changes">
+                    <h3>Gameplay Changes:</h3>
+                    <button id="restart">Restart</button>
+                    <button id="undo">Undo Move</button>
+                </section>
+                <!-- New Addition - Scoreboard area -->
+                <section id="scoreboard">
+                    <h3>Scoreboard:</h3>
+                    <p>Clicks: &nbsp;</p>
+                    <p id="numberOfClicks"></p>
+                    <p>Points: &nbsp;</p>
+                    <p id="playerScore"></p>
+                </section>
+            </div>
+            <!-- New Addition - Area for winning/highscore results -->
+            <div id="results"></div>
         </div>
         <script src="floodfill.js"></script>
     </body>
