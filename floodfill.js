@@ -131,6 +131,19 @@ function restart() {
     startGame(grids[0]);
 }
 
+// New Addition - Function to undo the last move (works with multiple moves)
+function undoLastMove() {
+    // As long as the grids array holds more than 1 grid state we can undo moves
+    if (grids.length > 1) {
+        grids.pop(); // Remove most recent grid state
+        playerScore -= previousPointGains[previousPointGains.length - 1]; // Decrement player score by most recent point gains
+        previousPointGains.pop(); // Remove last point gain to keep accurate history
+        numberOfClicks--; // Decrement the number of clicks
+        results.innerHTML = ""; // Remove final results
+        render(grids[grids.length - 1]); // Re-render after changes.
+    }
+}
+
 // #endregion
 
 // *****************************************************************************
@@ -144,6 +157,12 @@ function gridClickHandler() {
 restartButton.addEventListener("mousedown", restartClickHandler);
 function restartClickHandler() {
     restart();
+}
+
+// New Addition - Event listener/handler function for the undo button
+undoButton.addEventListener("mousedown", undoClickHandler);
+function undoClickHandler() {
+    undoLastMove();
 }
 
 colorSelectButtons.forEach((button) => {
