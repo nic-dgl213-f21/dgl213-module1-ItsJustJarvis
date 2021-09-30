@@ -127,6 +127,21 @@ function updatePlayerScore() {
     cellsChanged = 0; // Reset cellsChanged after each score update
 }
 
+// New Addition - Function that checks for win coniditons
+function checkWinConditions(grid) {
+    let startingCell = grid[0]; // Obtain first cell's color
+    for (let i = 0; i < grid.length; i++) {
+        // Compare each cell in the grid against first cell to see if they all match
+        if (grid[i] != startingCell) return; //  If a cell doesnt match, return and exit function
+    }
+    // If this point is reached, all cells match and win conditions are met
+    finalScore = Math.floor(playerScore / numberOfClicks); // Calculate final score base on points/clicks
+    trackHighScores(finalScore); // Call to function that tracks high scores for restarted grids
+    // Set the win statemtn and update results section
+    let winStatement = `<section id ="winner"><h3>YOU WIN!<p>Final Score:&nbsp;${finalScore}</p></section>`;
+    results.innerHTML += winStatement;
+}
+
 function restart() {
     startGame(grids[0]);
 }
