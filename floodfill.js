@@ -116,6 +116,13 @@ function floodFill(grid, gridCoordinate, colorToChange) {
     return;
 }
 
+// New Addition - Function that updates the player score value
+function updatePlayerScore() {
+    playerScore += cellsChanged * 5; // 5 points per cell changed
+    previousPointGains.push(cellsChanged * 5); // Running history of point gains
+    cellsChanged = 0; // Reset cellsChanged after each score update
+}
+
 function restart() {
     startGame(grids[0]);
 }
