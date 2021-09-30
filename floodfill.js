@@ -56,6 +56,11 @@ let finalScore;
 // #region Game Logic
 
 function startGame(startingGrid = []) {
+    // New addition - Initialize our scoring values to 0 on a new game
+    numberOfClicks = 0;
+    cellsChanged = 0;
+    playerScore = 0;
+    finalScore = 0;
     if (startingGrid.length === 0) {
         startingGrid = initializeGrid();
     }
