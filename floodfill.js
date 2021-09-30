@@ -100,7 +100,11 @@ function updateGridAt(mousePositionX, mousePositionY) {
     const newGrid = grids[grids.length - 1].slice(); //Makes a copy of the most recent grid state
     floodFill(newGrid, gridCoordinates, newGrid[gridCoordinates.row * CELLS_PER_AXIS + gridCoordinates.column]);
     grids.push(newGrid);
+    // New Addition - Call updatePlayerScore() to update the player score during grid updates
+    updatePlayerScore();
     render(grids[grids.length - 1]);
+    // New Addition - Call checkWinConditions() to check for win conditions after rendering latest grid
+    checkWinConditions(grids[grids.length - 1]);
 }
 
 function floodFill(grid, gridCoordinate, colorToChange) {
