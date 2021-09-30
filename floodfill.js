@@ -50,6 +50,10 @@ let cellsChanged;
 let playerScore;
 let finalScore;
 
+// New Addition - History values
+let previousPointGains = [];
+let previousHighScore = 0;
+
 // #endregion
 
 // *****************************************************************************
