@@ -36,6 +36,8 @@ const CELL_COLORS = {
     green: [0, 255, 0],
     blue: [0, 0, 255],
 };
+
+// Cell dimensions
 const CELLS_PER_AXIS = 9;
 const CELL_WIDTH = canvas.width / CELLS_PER_AXIS;
 const CELL_HEIGHT = canvas.height / CELLS_PER_AXIS;
@@ -173,7 +175,8 @@ function undoLastMove() {
 // #region Event Listeners
 
 canvas.addEventListener("mousedown", gridClickHandler);
-function gridClickHandler() {
+function gridClickHandler(event) {
+    numberOfClicks++;
     updateGridAt(event.offsetX, event.offsetY);
 }
 
@@ -241,3 +244,4 @@ function trackHighScores(finalScore) {
 
 //Start game
 startGame();
+
