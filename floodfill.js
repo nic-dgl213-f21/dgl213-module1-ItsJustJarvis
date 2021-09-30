@@ -44,6 +44,12 @@ const CELL_HEIGHT = canvas.height / CELLS_PER_AXIS;
 let replacementColor = CELL_COLORS.white;
 let grids;
 
+// New Addition - Variables for scoring values
+let numberOfClicks;
+let cellsChanged;
+let playerScore;
+let finalScore;
+
 // #endregion
 
 // *****************************************************************************
