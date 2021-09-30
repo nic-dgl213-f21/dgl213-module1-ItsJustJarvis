@@ -126,7 +126,6 @@ function floodFill(grid, gridCoordinate, colorToChange) {
     return;
 }
 
-
 // New Addition - Function that updates the player score value
 function updatePlayerScore() {
     playerScore += cellsChanged * 5; // 5 points per cell changed
@@ -201,8 +200,8 @@ colorSelectButtons.forEach((button) => {
 // To convert canvas coordinates to grid coordinates
 function convertCartesiansToGrid(xPos, yPos) {
     return {
-        column: Math.floor(xPos / CELL_WIDTH),
-        row: Math.floor(yPos / CELL_HEIGHT),
+        column: Math.floor(xPos / (canvas.clientWidth / CELLS_PER_AXIS)),
+        row: Math.floor(yPos / (canvas.clientHeight / CELLS_PER_AXIS)),
     };
 }
 
