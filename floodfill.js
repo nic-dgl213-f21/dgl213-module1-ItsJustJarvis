@@ -1,3 +1,13 @@
+/* 
+    Name:   Reeve Jarvis
+    Course: DGL-213
+    Section: DLU1
+    Assignment: Module #1 Milestone #2
+    Date: 09/30/2021
+
+    Filename:   index.html
+*/
+
 "use strict";
 
 // *****************************************************************************
