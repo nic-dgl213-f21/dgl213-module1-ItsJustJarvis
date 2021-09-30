@@ -112,6 +112,8 @@ function floodFill(grid, gridCoordinate, colorToChange) {
     } //The current cell is a different color than the initially clicked-on cell
     else {
         grid[gridCoordinate.row * CELLS_PER_AXIS + gridCoordinate.column] = replacementColor;
+        // New Addition - Call trackCellChanges() to keep track of cell color changes
+        trackCellChanges();
         floodFill(grid, { column: Math.max(gridCoordinate.column - 1, 0), row: gridCoordinate.row }, colorToChange);
         floodFill(grid, { column: Math.min(gridCoordinate.column + 1, CELLS_PER_AXIS - 1), row: gridCoordinate.row }, colorToChange);
         floodFill(grid, { column: gridCoordinate.column, row: Math.max(gridCoordinate.row - 1, 0) }, colorToChange);
@@ -119,6 +121,7 @@ function floodFill(grid, gridCoordinate, colorToChange) {
     }
     return;
 }
+
 
 // New Addition - Function that updates the player score value
 function updatePlayerScore() {
