@@ -244,4 +244,3 @@ function trackHighScores(finalScore) {
 
 //Start game
 startGame();
-
