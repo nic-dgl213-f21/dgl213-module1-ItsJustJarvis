@@ -142,11 +142,17 @@ function checkWinConditions(grid) {
         // Compare each cell in the grid against first cell to see if they all match
         if (grid[i] != startingCell) return; //  If a cell doesnt match, return and exit function
     }
+
+    let winStatement;
     // If this point is reached, all cells match and win conditions are met
     finalScore = Math.floor(playerPoints / numberOfClicks); // Calculate final score base on points/clicks
     trackHighScores(finalScore); // Call to function that tracks high scores for restarted grids
     // Set the win statemtn and update results section
-    let winStatement = `<section id ="winner"><h3>YOU WIN!<p>Final Score:&nbsp;${finalScore}</p></section>`;
+    if (finalScore >= 200) {
+        winStatement = `<section id ="winner"><h3>YOU WIN!<p>Final Score:&nbsp;${finalScore}</p></section>`;
+    } else {
+        winStatement = `<section id ="winner"><h3>Sorry, you did not score high enough! Try again.<p>Final Score:&nbsp;${finalScore}</p></section>`;
+    }
     results.innerHTML += winStatement;
 }
 
