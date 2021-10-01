@@ -26,7 +26,8 @@ const undoButton = document.querySelector("#undo");
 // New Addition - References to new scoreboard elements
 const numberOfClicksText = document.querySelector("#numberOfClicks");
 const playerPointsText = document.querySelector("#playerPoints");
-const results = document.querySelector("#results");
+const gameOver = document.querySelector("#gameOver");
+const highScore = document.querySelector("#highScore");
 
 // Constants
 const CELL_COLORS = {
@@ -150,16 +151,17 @@ function checkWinConditions(grid) {
     trackHighScores(finalScore); // Call to function that tracks high scores for restarted grids
     // Set the win statemtn and update results section
     if (finalScore >= WIN_SCORE) {
-        winStatement = `<section id ="winner"><h3>YOU WIN!<p>Final Score:&nbsp;${finalScore}</p></section>`;
+        winStatement = `<section id ="gameOver"><h3>YOU WIN!<p>Final Score:&nbsp;${finalScore}</p></section>`;
     } else {
-        winStatement = `<section id ="winner"><h3>Sorry, you did not score high enough! Try again.<p>Final Score:&nbsp;${finalScore}</p></section>`;
+        winStatement = `<section id ="gameOver"><h3>Sorry, you did not score high enough! Try again.<p>Final Score:&nbsp;${finalScore}</p></section>`;
     }
-    results.innerHTML += winStatement;
+    gameOver.innerHTML += winStatement;
 }
 
 function restart() {
     // New Addition - On restart keep the previous high score for reference in the results section
-    results.innerHTML = `<section id ="winner"><h3>Score To Beat<p>${previousHighScore}</p></section>`;
+    gameOver.innerHTML = "";
+    highScore.innerHTML = `<h3>Score To Beat<p>${previousHighScore}</p>`;
     startGame(grids[0]);
 }
 
@@ -171,7 +173,7 @@ function undoLastMove() {
         playerPoints -= previousPointGains[previousPointGains.length - 1]; // Decrement player score by most recent point gains
         previousPointGains.pop(); // Remove last point gain to keep accurate history
         numberOfClicks--; // Decrement the number of clicks
-        results.innerHTML = ""; // Remove final results
+        gameOver.innerHTML = "";
         render(grids[grids.length - 1]); // Re-render after changes.
     }
 }

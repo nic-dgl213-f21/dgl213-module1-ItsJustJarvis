@@ -109,20 +109,21 @@
             #scoreboard {
                 width: 25%;
             }
-            .color-select {
-                flex: 1 1 auto;
-            }
             section#scoreboard p {
                 display: inline-flex;
                 margin: auto;
             }
             #results {
-                text-align: center;
                 margin-bottom: 2rem;
             }
+            #gameOver,
+            #highScore,
             #winner {
                 margin: auto;
                 text-align: center;
+            }
+            .color-select {
+                flex: 1 1 auto;
             }
         </style>
     </head>
@@ -179,7 +180,10 @@
                 </section>
             </div>
             <!-- New Addition - Area for winning/highscore results -->
-            <div id="results"></div>
+            <div id="results">
+                <section id="highScore"></section>
+                <section id="gameOver"></section>
+            </div>
         </div>
         <script src="floodfill.js"></script>
     </body>
