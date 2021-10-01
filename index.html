@@ -36,7 +36,7 @@
                 margin: auto;
             }
             h1 {
-                margin: 2rem auto;
+                margin: 1rem auto;
                 font-size: 3rem;
             }
             h1,
@@ -51,7 +51,7 @@
                 font-family: "Montserrat", sans-serif;
             }
             canvas {
-                width: 600px;
+                width: 100%;
                 min-height: 100%;
             }
             #gameArea {
@@ -60,7 +60,6 @@
                 display: flex;
                 flex-flow: column;
             }
-
             #gameTitle,
             #gameBoard,
             #ui,
@@ -88,39 +87,42 @@
                 padding: 1rem;
             }
             #gameTitle {
-                margin-top: 3rem;
+                margin-top: 2rem;
                 border-top: 6px solid black;
                 border-left: 6px solid black;
                 border-right: 6px solid black;
             }
-            #results {
-                text-align: center;
-                margin-bottom: 3rem;
-            }
-            #winner {
-                margin: auto;
-                text-align: center;
+            #canvasArea,
+            #instructions {
+                width: 50%;
             }
             #instructions {
                 text-align: left;
                 padding: 1rem;
             }
             #changes {
-                width: 20%;
+                width: 25%;
             }
             #colors {
-                width: 40%;
+                width: 50%;
             }
             #scoreboard {
-                width: 20%;
+                width: 25%;
             }
             .color-select {
-                flex: auto;
-                width: auto;
+                flex: 1 1 auto;
             }
             section#scoreboard p {
                 display: inline-flex;
                 margin: auto;
+            }
+            #results {
+                text-align: center;
+                margin-bottom: 2rem;
+            }
+            #winner {
+                margin: auto;
+                text-align: center;
             }
         </style>
     </head>
