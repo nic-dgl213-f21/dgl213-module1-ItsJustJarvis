@@ -151,17 +151,17 @@ function checkWinConditions(grid) {
     trackHighScores(finalScore); // Call to function that tracks high scores for restarted grids
     // Set the win statemtn and update results section
     if (finalScore >= WIN_SCORE) {
-        winStatement = `<section id ="gameOver"><h3>YOU WIN!<p>Final Score:&nbsp;${finalScore}</p></section>`;
+        winStatement = `<h3>YOU WIN!</h3><p>Final Score:&nbsp;${finalScore}</p>`;
     } else {
-        winStatement = `<section id ="gameOver"><h3>Sorry, you did not score high enough! Try again.<p>Final Score:&nbsp;${finalScore}</p></section>`;
+        winStatement = `<h3>SORRY! Try again.</h3><p>Final Score:&nbsp;${finalScore}</p>`;
     }
-    gameOver.innerHTML += winStatement;
+    gameOver.innerHTML = winStatement;
 }
 
 function restart() {
     // New Addition - On restart keep the previous high score for reference in the results section
     gameOver.innerHTML = "";
-    highScore.innerHTML = `<h3>Score To Beat<p>${previousHighScore}</p>`;
+    highScore.innerHTML = `<h3>Score To Beat</h3><p>${previousHighScore}</p>`;
     startGame(grids[0]);
 }
 
