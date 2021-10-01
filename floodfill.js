@@ -25,7 +25,7 @@ const undoButton = document.querySelector("#undo");
 
 // New Addition - References to new scoreboard elements
 const numberOfClicksText = document.querySelector("#numberOfClicks");
-const playerScoreText = document.querySelector("#playerScore");
+const playerPointsText = document.querySelector("#playerPoints");
 const results = document.querySelector("#results");
 
 // Constants
@@ -49,11 +49,11 @@ let grids;
 // New Addition - Variables for scoring values
 let numberOfClicks;
 let cellsChanged;
-let playerScore;
+let playerPoints;
 let finalScore;
 
 // New Addition - History values
-let previousPointGains = [];
+const previousPointGains = [];
 let previousHighScore = 0;
 
 // #endregion
@@ -65,7 +65,7 @@ function startGame(startingGrid = []) {
     // New addition - Initialize our scoring values to 0 on a new game
     numberOfClicks = 0;
     cellsChanged = 0;
-    playerScore = 0;
+    playerPoints = 0;
     finalScore = 0;
     if (startingGrid.length === 0) {
         startingGrid = initializeGrid();
@@ -94,7 +94,7 @@ function render(grid) {
     }
     // New Addition - On render we update our scoreboard elements with current values
     numberOfClicksText.innerText = numberOfClicks;
-    playerScoreText.innerText = playerScore;
+    playerPointsText.innerText = playerPoints;
 }
 
 function updateGridAt(mousePositionX, mousePositionY) {
@@ -103,7 +103,7 @@ function updateGridAt(mousePositionX, mousePositionY) {
     floodFill(newGrid, gridCoordinates, newGrid[gridCoordinates.row * CELLS_PER_AXIS + gridCoordinates.column]);
     grids.push(newGrid);
     // New Addition - Call updatePlayerScore() to update the player score during grid updates
-    updatePlayerScore();
+    updatePlayerPoints();
     render(grids[grids.length - 1]);
     // New Addition - Call checkWinConditions() to check for win conditions after rendering latest grid
     checkWinConditions(grids[grids.length - 1]);
@@ -129,8 +129,8 @@ function floodFill(grid, gridCoordinate, colorToChange) {
 }
 
 // New Addition - Function that updates the player score value
-function updatePlayerScore() {
-    playerScore += cellsChanged * 5; // 5 points per cell changed
+function updatePlayerPoints() {
+    playerPoints += cellsChanged * 5; // 5 points per cell changed
     previousPointGains.push(cellsChanged * 5); // Running history of point gains
     cellsChanged = 0; // Reset cellsChanged after each score update
 }
@@ -143,7 +143,7 @@ function checkWinConditions(grid) {
         if (grid[i] != startingCell) return; //  If a cell doesnt match, return and exit function
     }
     // If this point is reached, all cells match and win conditions are met
-    finalScore = Math.floor(playerScore / numberOfClicks); // Calculate final score base on points/clicks
+    finalScore = Math.floor(playerPoints / numberOfClicks); // Calculate final score base on points/clicks
     trackHighScores(finalScore); // Call to function that tracks high scores for restarted grids
     // Set the win statemtn and update results section
     let winStatement = `<section id ="winner"><h3>YOU WIN!<p>Final Score:&nbsp;${finalScore}</p></section>`;
@@ -161,7 +161,7 @@ function undoLastMove() {
     // As long as the grids array holds more than 1 grid state we can undo moves
     if (grids.length > 1) {
         grids.pop(); // Remove most recent grid state
-        playerScore -= previousPointGains[previousPointGains.length - 1]; // Decrement player score by most recent point gains
+        playerPoints -= previousPointGains[previousPointGains.length - 1]; // Decrement player score by most recent point gains
         previousPointGains.pop(); // Remove last point gain to keep accurate history
         numberOfClicks--; // Decrement the number of clicks
         results.innerHTML = ""; // Remove final results
