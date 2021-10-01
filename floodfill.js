@@ -18,7 +18,7 @@ const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 
 // UI references
-const restartButton = document.querySelector("#restart");
+const restartButton = document.querySelector(".restart");
 const colorSelectButtons = document.querySelectorAll(".color-select");
 // New Addition - Reference to the undo button
 const undoButton = document.querySelector("#undo");
@@ -151,17 +151,18 @@ function checkWinConditions(grid) {
     trackHighScores(finalScore); // Call to function that tracks high scores for restarted grids
     // Set the win statemtn and update results section
     if (finalScore >= WIN_SCORE) {
-        winStatement = `<h3>YOU WIN!</h3><p>Final Score:&nbsp;${finalScore}</p>`;
+        winStatement = `<h3>YOU WIN!</h3><p>Final Score: ${finalScore}</p>`;
     } else {
-        winStatement = `<h3>SORRY! Try again.</h3><p>Final Score:&nbsp;${finalScore}</p>`;
+        winStatement = `<h3>YOU LOSE!</h3><p>Final Score: ${finalScore}</p>`;
     }
+    highScore.innerHTML = "<h3>TRY AND BEAT IT!</h3><p>Press Restart</p>";
     gameOver.innerHTML = winStatement;
 }
 
 function restart() {
     // New Addition - On restart keep the previous high score for reference in the results section
     gameOver.innerHTML = "";
-    highScore.innerHTML = `<h3>Score To Beat</h3><p>${previousHighScore}</p>`;
+    highScore.innerHTML = `<>Score To Beat: ${previousHighScore}</>`;
     startGame(grids[0]);
 }
 

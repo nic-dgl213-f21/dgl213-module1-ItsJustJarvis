@@ -32,7 +32,7 @@
                 min-height: 100%;
             }
             body {
-                width: 60%;
+                width: 75%;
                 margin: auto;
             }
             h1 {
@@ -55,7 +55,8 @@
                 min-height: 100%;
             }
             #gameArea {
-                width: 90%;
+                width: 1000px;
+
                 margin: auto;
                 display: flex;
                 flex-flow: column;
@@ -119,6 +120,8 @@
             #gameOver,
             #highScore,
             #winner {
+                font-size: 1rem;
+                font-weight: 700;
                 margin: auto;
                 text-align: center;
             }
@@ -167,7 +170,7 @@
                 </section>
                 <section id="changes">
                     <h3>Gameplay Changes:</h3>
-                    <button id="restart">Restart</button>
+                    <button class="restart">Restart</button>
                     <button id="undo">Undo Move</button>
                 </section>
                 <!-- New Addition - Scoreboard area -->
@@ -181,8 +184,8 @@
             </div>
             <!-- New Addition - Area for winning/highscore results -->
             <div id="results">
-                <section id="highScore"></section>
                 <section id="gameOver"></section>
+                <section id="highScore"></section>
             </div>
         </div>
         <script src="floodfill.js"></script>
