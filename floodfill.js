@@ -161,8 +161,8 @@ function checkWinConditions(grid) {
 
 function restart() {
     // New Addition - On restart keep the previous high score for reference in the results section
-    gameOver.innerHTML = "";
-    highScore.innerHTML = `<>Score To Beat: ${previousHighScore}</>`;
+    highScore.innerHTML = "";
+    gameOver.innerHTML = `<h3>Score To Beat:</h3><p>${previousHighScore}</p>`;
     startGame(grids[0]);
 }
 
