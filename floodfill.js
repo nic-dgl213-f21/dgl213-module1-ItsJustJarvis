@@ -26,7 +26,7 @@ const undoButton = document.querySelector("#undo");
 const numberOfClicksText = document.querySelector("#numberOfClicks");
 const playerPointsText = document.querySelector("#playerScore");
 const gameOver = document.querySelector("#gameOver");
-const highScore = document.querySelector("#highScore");
+const results = document.querySelector("#highScore");
 
 // Constants
 const CELL_COLORS = {
@@ -168,14 +168,14 @@ function displayResults() {
     replayPromptHeading.innerText = "TRY AND BEAT IT!";
     replayPrompt.innerText = "Press Restart";
 
-    highScore.appendChild(replayPromptHeading);
-    highScore.appendChild(replayPrompt);
+    results.appendChild(replayPromptHeading);
+    results.appendChild(replayPrompt);
     gameOver.appendChild(winHeading);
     gameOver.appendChild(winStatement);
 }
 
 function restart() {
-    highScore.innerText = "";
+    results.innerText = "";
     winHeading.innerText = "Score To Beat:";
     winStatement.innerText = `${previousHighScore}`;
     gameOver.appendChild(winHeading);
@@ -189,7 +189,8 @@ function undoLastMove() {
         playerScore -= previousPointGains[previousPointGains.length - 1];
         previousPointGains.pop();
         numberOfClicks--;
-        gameOver.innerHTML = "";
+        gameOver.innerText = "";
+        results.innerText = "";
         render(grids[grids.length - 1]);
     }
     if (!isInteractionOpen) {
