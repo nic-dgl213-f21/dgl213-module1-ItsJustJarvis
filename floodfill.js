@@ -20,10 +20,9 @@ const ctx = canvas.getContext("2d");
 // UI references
 const restartButton = document.querySelector(".restart");
 const colorSelectButtons = document.querySelectorAll(".color-select");
-// New Addition - Reference to the undo button
 const undoButton = document.querySelector("#undo");
 
-// New Addition - References to new scoreboard elements
+// References to new scoreboard elements
 const numberOfClicksText = document.querySelector("#numberOfClicks");
 const playerPointsText = document.querySelector("#playerPoints");
 const gameOver = document.querySelector("#gameOver");
@@ -47,14 +46,14 @@ const CELL_HEIGHT = canvas.height / CELLS_PER_AXIS;
 let replacementColor = CELL_COLORS.white;
 let grids;
 
-// New Addition - Variables for scoring values
+// Variables for scoring values
 const WIN_SCORE = 200;
 let numberOfClicks;
 let cellsChanged;
 let playerPoints;
 let finalScore;
 
-// New Addition - History values
+// History values
 const previousPointGains = [];
 let previousHighScore = 0;
 
@@ -64,7 +63,6 @@ let previousHighScore = 0;
 // #region Game Logic
 
 function startGame(startingGrid = []) {
-    // New addition - Initialize our scoring values to 0 on a new game
     numberOfClicks = 0;
     cellsChanged = 0;
     playerPoints = 0;
@@ -94,33 +92,27 @@ function render(grid) {
         ctx.fillStyle = `rgb(${grid[i][0]}, ${grid[i][1]}, ${grid[i][2]})`;
         ctx.fillRect((i % CELLS_PER_AXIS) * CELL_WIDTH, Math.floor(i / CELLS_PER_AXIS) * CELL_HEIGHT, CELL_WIDTH, CELL_HEIGHT);
     }
-    // New Addition - On render we update our scoreboard elements with current values
     numberOfClicksText.innerText = numberOfClicks;
     playerPointsText.innerText = playerPoints;
 }
 
 function updateGridAt(mousePositionX, mousePositionY) {
     const gridCoordinates = convertCartesiansToGrid(mousePositionX, mousePositionY);
-    const newGrid = grids[grids.length - 1].slice(); //Makes a copy of the most recent grid state
+    const newGrid = grids[grids.length - 1].slice();
     floodFill(newGrid, gridCoordinates, newGrid[gridCoordinates.row * CELLS_PER_AXIS + gridCoordinates.column]);
     grids.push(newGrid);
-    // New Addition - Call updatePlayerScore() to update the player score during grid updates
     updatePlayerPoints();
     render(grids[grids.length - 1]);
-    // New Addition - Call checkWinConditions() to check for win conditions after rendering latest grid
     checkWinConditions(grids[grids.length - 1]);
 }
 
 function floodFill(grid, gridCoordinate, colorToChange) {
     if (arraysAreEqual(colorToChange, replacementColor)) {
         return;
-    } //The current cell is already the selected color
-    else if (!arraysAreEqual(grid[gridCoordinate.row * CELLS_PER_AXIS + gridCoordinate.column], colorToChange)) {
+    } else if (!arraysAreEqual(grid[gridCoordinate.row * CELLS_PER_AXIS + gridCoordinate.column], colorToChange)) {
         return;
-    } //The current cell is a different color than the initially clicked-on cell
-    else {
+    } else {
         grid[gridCoordinate.row * CELLS_PER_AXIS + gridCoordinate.column] = replacementColor;
-        // New Addition - Call trackCellChanges() to keep track of cell color changes
         trackCellChanges();
         floodFill(grid, { column: Math.max(gridCoordinate.column - 1, 0), row: gridCoordinate.row }, colorToChange);
         floodFill(grid, { column: Math.min(gridCoordinate.column + 1, CELLS_PER_AXIS - 1), row: gridCoordinate.row }, colorToChange);
@@ -130,26 +122,21 @@ function floodFill(grid, gridCoordinate, colorToChange) {
     return;
 }
 
-// New Addition - Function that updates the player score value
 function updatePlayerPoints() {
-    playerPoints += cellsChanged * 5; // 5 points per cell changed
-    previousPointGains.push(cellsChanged * 5); // Running history of point gains
-    cellsChanged = 0; // Reset cellsChanged after each score update
+    playerPoints += cellsChanged * 5;
+    previousPointGains.push(cellsChanged * 5);
+    cellsChanged = 0;
 }
 
-// New Addition - Function that checks for win coniditons
 function checkWinConditions(grid) {
-    let startingCell = grid[0]; // Obtain first cell's color
+    let startingCell = grid[0];
     for (let i = 0; i < grid.length; i++) {
-        // Compare each cell in the grid against first cell to see if they all match
-        if (grid[i] != startingCell) return; //  If a cell doesnt match, return and exit function
+        if (grid[i] != startingCell) return;
     }
 
     let winStatement;
-    // If this point is reached, all cells match and win conditions are met
-    finalScore = Math.floor(playerPoints / numberOfClicks); // Calculate final score base on points/clicks
-    trackHighScores(finalScore); // Call to function that tracks high scores for restarted grids
-    // Set the win statemtn and update results section
+    finalScore = Math.floor(playerPoints / numberOfClicks);
+    trackHighScores(finalScore);
     if (finalScore >= WIN_SCORE) {
         winStatement = `<h3>YOU WIN!</h3><p>Final Score: ${finalScore}</p>`;
     } else {
@@ -160,22 +147,19 @@ function checkWinConditions(grid) {
 }
 
 function restart() {
-    // New Addition - On restart keep the previous high score for reference in the results section
     highScore.innerHTML = "";
     gameOver.innerHTML = `<h3>Score To Beat:</h3><p>${previousHighScore}</p>`;
     startGame(grids[0]);
 }
 
-// New Addition - Function to undo the last move (works with multiple moves)
 function undoLastMove() {
-    // As long as the grids array holds more than 1 grid state we can undo moves
     if (grids.length > 1) {
-        grids.pop(); // Remove most recent grid state
-        playerPoints -= previousPointGains[previousPointGains.length - 1]; // Decrement player score by most recent point gains
-        previousPointGains.pop(); // Remove last point gain to keep accurate history
-        numberOfClicks--; // Decrement the number of clicks
+        grids.pop();
+        playerPoints -= previousPointGains[previousPointGains.length - 1];
+        previousPointGains.pop();
+        numberOfClicks--;
         gameOver.innerHTML = "";
-        render(grids[grids.length - 1]); // Re-render after changes.
+        render(grids[grids.length - 1]);
     }
 }
 
@@ -195,7 +179,6 @@ function restartClickHandler() {
     restart();
 }
 
-// New Addition - Event listener/handler function for the undo button
 undoButton.addEventListener("mousedown", undoClickHandler);
 function undoClickHandler() {
     undoLastMove();
@@ -210,7 +193,6 @@ colorSelectButtons.forEach((button) => {
 // *****************************************************************************
 // #region Helper Functions
 
-// To convert canvas coordinates to grid coordinates
 function convertCartesiansToGrid(xPos, yPos) {
     return {
         column: Math.floor(xPos / (canvas.clientWidth / CELLS_PER_AXIS)),
@@ -218,13 +200,11 @@ function convertCartesiansToGrid(xPos, yPos) {
     };
 }
 
-// To choose a random property from a given object
 function chooseRandomPropertyFrom(object) {
     const keys = Object.keys(object);
-    return object[keys[Math.floor(keys.length * Math.random())]]; //Truncates to integer
+    return object[keys[Math.floor(keys.length * Math.random())]];
 }
 
-// To compare two arrays
 function arraysAreEqual(arr1, arr2) {
     if (arr1.length != arr2.length) {
         return false;
@@ -238,12 +218,10 @@ function arraysAreEqual(arr1, arr2) {
     }
 }
 
-// New Addition - Function that tracks the number of cells changed
 function trackCellChanges() {
     cellsChanged++;
 }
 
-// New Addition - Function that tracks the high score for grid repeats
 function trackHighScores(finalScore) {
     if (finalScore > previousHighScore) {
         previousHighScore = finalScore;
