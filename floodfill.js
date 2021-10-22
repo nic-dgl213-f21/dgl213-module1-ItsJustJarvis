@@ -157,6 +157,7 @@ function restart() {
     highScore.innerHTML = "";
     gameOver.innerHTML = `<h3>Score To Beat:</h3><p>${previousHighScore}</p>`;
     startGame(grids[0]);
+    startGame();
 }
 
 function undoLastMove() {
