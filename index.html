@@ -16,7 +16,6 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet" />
-        <!-- New Addition - Styles added for a more responsive game, as well as better UI and personality -->
         <style>
             :root {
                 background: linear-gradient(45deg, rgba(255, 0, 0, 0.4), rgba(0, 255, 0, 0.4), rgba(0, 0, 255, 0.4));
@@ -131,9 +130,7 @@
         </style>
     </head>
     <body>
-        <!-- New Addition - Container for the game to assist with layout changes -->
         <div id="gameArea">
-            <!--New Addition - Different containers within game area for each modular peice of UI -->
             <div id="gameTitle">
                 <h1>Flood Fill</h1>
             </div>
@@ -149,17 +146,15 @@
                         <li>Click on a cell to change its color to the selected color.</li>
                         <li>All neighbouring cells of the clicked-on cell's color will be changed to the selected color.</li>
                     </ul>
-                    <!-- New Addition - Updated Information on scoring system -->
                     <h2>Scoring System:</h2>
                     <p>
-                        You get <strong>5 points</strong> per cell changed on each click. When you fill the board your final score is calculated based on the
-                        number of clicks it took you to finish. Higher changes, higher rewards!
+                        You get <strong>5 points</strong> per cell changed on each click. Your score is calculated based on the number of clicks it took you to
+                        finish. Higher changes, higher rewards!
                     </p>
                     <p>Your final score must be at least <strong>200 points</strong> to beat the grid.</p>
                 </div>
             </div>
             <div id="ui">
-                <!-- New Addition - UI split into sections based on purpose -->
                 <section id="colors">
                     <h3>Color Choices:</h3>
                     <button name="red" class="color-select">Red</button>
@@ -173,16 +168,14 @@
                     <button class="restart">Restart</button>
                     <button id="undo">Undo Move</button>
                 </section>
-                <!-- New Addition - Scoreboard area -->
                 <section id="scoreboard">
                     <h3>Scoreboard:</h3>
                     <p>Clicks: &nbsp;</p>
                     <p id="numberOfClicks"></p>
-                    <p>Points: &nbsp;</p>
-                    <p id="playerPoints"></p>
+                    <p>Score: &nbsp;</p>
+                    <p id="playerScore"></p>
                 </section>
             </div>
-            <!-- New Addition - Area for winning/highscore results -->
             <div id="results">
                 <section id="gameOver"></section>
                 <section id="highScore"></section>
