@@ -42,6 +42,8 @@ const CELLS_PER_AXIS = 9;
 const CELL_WIDTH = canvas.width / CELLS_PER_AXIS;
 const CELL_HEIGHT = canvas.height / CELLS_PER_AXIS;
 
+let isInteractionOpen = false;
+
 // Game objects
 let replacementColor = CELL_COLORS.white;
 let grids;
@@ -79,6 +81,7 @@ function startGame(startingGrid = []) {
     initializeHistory(startingGrid);
     initializePlayer();
     render(grids[0]);
+    startCanvasInteraction();
 }
 
 function initializePlayer() {
@@ -147,6 +150,7 @@ function checkWinConditions(grid) {
     for (let i = 0; i < grid.length; i++) {
         if (grid[i] != startingCell) return;
     }
+    stopCanvasInteraction();
     displayResults();
 }
 
@@ -188,6 +192,9 @@ function undoLastMove() {
         gameOver.innerHTML = "";
         render(grids[grids.length - 1]);
     }
+    if (!isInteractionOpen) {
+        startCanvasInteraction();
+    }
 }
 
 // #endregion
@@ -195,7 +202,16 @@ function undoLastMove() {
 // *****************************************************************************
 // #region Event Listeners
 
-canvas.addEventListener("mousedown", gridClickHandler);
+function startCanvasInteraction() {
+    canvas.addEventListener("mousedown", gridClickHandler);
+    isInteractionOpen = true;
+}
+
+function stopCanvasInteraction() {
+    canvas.removeEventListener("mousedown", gridClickHandler);
+    isInteractionOpen = false;
+}
+
 function gridClickHandler(event) {
     numberOfClicks++;
     updateGridAt(event.offsetX, event.offsetY);
