@@ -62,15 +62,22 @@ let previousHighScore = 0;
 // #region Game Logic
 
 function startGame(startingGrid = []) {
-    numberOfClicks = 0;
-    cellsChanged = 0;
-    playerPoints = 0;
-    finalScore = 0;
+    if (!Array.isArray(startingGrid)) {
+        return;
+    }
+
     if (startingGrid.length === 0) {
         startingGrid = initializeGrid();
     }
     initializeHistory(startingGrid);
+    initializePlayer();
     render(grids[0]);
+}
+
+function initializePlayer() {
+    numberOfClicks = 0;
+    cellsChanged = 0;
+    playerScore = 0;
 }
 
 function initializeGrid() {
