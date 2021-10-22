@@ -56,6 +56,13 @@ let playerScore;
 const previousPointGains = [];
 let previousHighScore = 0;
 
+// Results Content
+
+let winHeading = document.createElement("h3");
+let winStatement = document.createElement("p");
+let replayPromptHeading = document.createElement("h3");
+let replayPrompt = document.createElement("p");
+
 // #endregion
 
 // *****************************************************************************
@@ -140,23 +147,35 @@ function checkWinConditions(grid) {
     for (let i = 0; i < grid.length; i++) {
         if (grid[i] != startingCell) return;
     }
+    displayResults();
+}
 
-    let winStatement;
-    finalScore = Math.floor(playerPoints / numberOfClicks);
+function displayResults() {
+    let finalScore = Math.floor(playerScore / numberOfClicks);
     trackHighScores(finalScore);
+
     if (finalScore >= WIN_SCORE) {
-        winStatement = `<h3>YOU WIN!</h3><p>Final Score: ${finalScore}</p>`;
+        winHeading.innerText = "YOU WIN!";
+        winStatement.innerText = `Final Score: ${finalScore}`;
     } else {
-        winStatement = `<h3>YOU LOSE!</h3><p>Final Score: ${finalScore}</p>`;
+        winHeading.innerText = "YOU LOSE!";
+        winStatement.innerText = `Final Score: ${finalScore}`;
     }
-    highScore.innerHTML = "<h3>TRY AND BEAT IT!</h3><p>Press Restart</p>";
-    gameOver.innerHTML = winStatement;
+    replayPromptHeading.innerText = "TRY AND BEAT IT!";
+    replayPrompt.innerText = "Press Restart";
+
+    highScore.appendChild(replayPromptHeading);
+    highScore.appendChild(replayPrompt);
+    gameOver.appendChild(winHeading);
+    gameOver.appendChild(winStatement);
 }
 
 function restart() {
-    highScore.innerHTML = "";
-    gameOver.innerHTML = `<h3>Score To Beat:</h3><p>${previousHighScore}</p>`;
-    startGame(grids[0]);
+    highScore.innerText = "";
+    winHeading.innerText = "Score To Beat:";
+    winStatement.innerText = `${previousHighScore}`;
+    gameOver.appendChild(winHeading);
+    gameOver.appendChild(winStatement);
     startGame();
 }
 
