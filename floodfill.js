@@ -24,7 +24,7 @@ const undoButton = document.querySelector("#undo");
 
 // References to new scoreboard elements
 const numberOfClicksText = document.querySelector("#numberOfClicks");
-const playerPointsText = document.querySelector("#playerPoints");
+const playerPointsText = document.querySelector("#playerScore");
 const gameOver = document.querySelector("#gameOver");
 const highScore = document.querySelector("#highScore");
 
@@ -50,8 +50,7 @@ let grids;
 const WIN_SCORE = 200;
 let numberOfClicks;
 let cellsChanged;
-let playerPoints;
-let finalScore;
+let playerScore;
 
 // History values
 const previousPointGains = [];
@@ -93,7 +92,7 @@ function render(grid) {
         ctx.fillRect((i % CELLS_PER_AXIS) * CELL_WIDTH, Math.floor(i / CELLS_PER_AXIS) * CELL_HEIGHT, CELL_WIDTH, CELL_HEIGHT);
     }
     numberOfClicksText.innerText = numberOfClicks;
-    playerPointsText.innerText = playerPoints;
+    playerPointsText.innerText = playerScore == 0 ? 0 : Math.floor(playerScore / numberOfClicks);
 }
 
 function updateGridAt(mousePositionX, mousePositionY) {
@@ -123,8 +122,9 @@ function floodFill(grid, gridCoordinate, colorToChange) {
 }
 
 function updatePlayerPoints() {
-    playerPoints += cellsChanged * 5;
-    previousPointGains.push(cellsChanged * 5);
+    let pointGain = cellsChanged * 5;
+    playerScore += pointGain;
+    previousPointGains.push(pointGain);
     cellsChanged = 0;
 }
 
@@ -155,7 +155,7 @@ function restart() {
 function undoLastMove() {
     if (grids.length > 1) {
         grids.pop();
-        playerPoints -= previousPointGains[previousPointGains.length - 1];
+        playerScore -= previousPointGains[previousPointGains.length - 1];
         previousPointGains.pop();
         numberOfClicks--;
         gameOver.innerHTML = "";
