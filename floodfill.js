@@ -3,7 +3,9 @@
     Course: DGL-213
     Section: DLU1
     Assignment: Module #1 Milestone #2
-    Date: 09/30/2021
+
+    ** Module 2.5 **
+    Latest Update: 10/21/2021
 
     Filename:   index.html
 */
